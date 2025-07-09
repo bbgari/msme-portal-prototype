@@ -1,1 +1,181 @@
-index
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNG MSME Portal - Prototype</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; }
+    header, footer { background-color: #8B0000; color: white; padding: 1em; text-align: center; }
+    nav { background: #333; padding: 0.5em; text-align: center; }
+    nav a { color: white; margin: 0 1em; text-decoration: none; display: inline-block; }
+    main { padding: 2em; }
+    .card { background: white; padding: 1.5em; margin: 1em auto; max-width: 600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .button { background: #8B0000; color: white; border: none; padding: 0.75em 1.5em; border-radius: 5px; cursor: pointer; text-align: center; display: inline-block; margin-top: 1em; }
+    .button:hover { background: #A52A2A; }
+    .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+    .modal-content { background-color: #fff; margin: 10% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+    input, textarea, select { width: 100%; padding: 0.75em; margin-top: 0.5em; border: 1px solid #ccc; border-radius: 4px; }
+    @media screen and (max-width: 768px) {
+      .card { margin: 1em; padding: 1em; }
+      nav a { display: block; margin: 0.5em 0; }
+    }
+    .admin-panel { background: #fff; padding: 1.5em; margin: 1em auto; max-width: 95%; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.15); }
+    table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+    th, td { padding: 0.75em; border: 1px solid #ccc; text-align: left; }
+    th { background-color: #eee; }
+    .marketplace-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1em; }
+    .product-card { background: #fff; border-radius: 8px; padding: 1em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+    .product-card img { max-width: 100%; height: 150px; object-fit: cover; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PNG MSME Portal</h1>
+    <p>Empowering MSMEs through Digital Services</p>
+  </header>  <nav>
+    <a href="#register">Business Registration</a>
+    <a href="#training">Training Hub</a>
+    <a href="#coaching">Coaching</a>
+    <a href="#tax">Tax Certificate</a>
+    <a href="#marketplace">Marketplace</a>
+    <a href="#admin">Admin Dashboard</a>
+  </nav>  <main>
+    <section class="card" id="register">
+      <h2>Register Your Business</h2>
+      <p>Start the journey by submitting your business information to SME Corporation and apply for a TIN with IRC.</p>
+      <button class="button" onclick="openModal('registerModal')">Start Registration</button>
+    </section><section class="card" id="training">
+  <h2>Training Hub</h2>
+  <p>Access free digital manuals, training videos, and business development guides to help grow your enterprise.</p>
+  <button class="button" onclick="openModal('trainingModal')">View Trainings</button>
+</section>
+
+<section class="card" id="coaching">
+  <h2>Get Business Coaching</h2>
+  <p>Connect with a business advisor for guidance and mentorship tailored to your MSME needs.</p>
+  <button class="button" onclick="openModal('coachingModal')">Request Coaching</button>
+</section>
+
+<section class="card" id="tax">
+  <h2>Get Tax Certificate</h2>
+  <p>Submit your TIN request to IRC and download your tax certificate once approved.</p>
+  <button class="button" onclick="openModal('taxModal')">Apply for Tax Certificate</button>
+</section>
+
+<section class="card" id="marketplace">
+  <h2>MSME Marketplace</h2>
+  <p>Explore products and services offered by registered MSMEs.</p>
+  <div class="marketplace-grid">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x150" alt="Product 1">
+      <h4>Kina Coffee Beans</h4>
+      <p>K5 per pack</p>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x150" alt="Product 2">
+      <h4>Handmade Bilum</h4>
+      <p>K45 each</p>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x150" alt="Product 3">
+      <h4>Local Honey</h4>
+      <p>K20 per bottle</p>
+    </div>
+  </div>
+  <button class="button" onclick="openModal('uploadModal')">Upload Product</button>
+</section>
+
+<section class="admin-panel" id="admin">
+  <h2>Admin Dashboard</h2>
+  <p>This section allows SME Corporation staff to view submitted business registrations, coaching requests, and tax applications.</p>
+  <h3>Recent Business Registrations</h3>
+  <table>
+    <tr><th>Business Name</th><th>Owner</th><th>Email</th><th>Status</th></tr>
+    <tr><td>Sunrise Bakery</td><td>Mary Kila</td><td>maryk@example.com</td><td>Pending</td></tr>
+    <tr><td>Papua Crafts</td><td>Tom Kora</td><td>tomk@example.com</td><td>Approved</td></tr>
+  </table>
+
+  <h3>Coaching Requests</h3>
+  <table>
+    <tr><th>Client</th><th>Business</th><th>Need</th><th>Status</th></tr>
+    <tr><td>Peter Wani</td><td>Green Market</td><td>Help with budgeting</td><td>In Progress</td></tr>
+  </table>
+
+  <h3>Tax Certificate Applications</h3>
+  <table>
+    <tr><th>Business</th><th>Contact</th><th>Email</th><th>Status</th></tr>
+    <tr><td>Kula Farming</td><td>Sina Wape</td><td>sina@example.com</td><td>Submitted</td></tr>
+  </table>
+</section>
+
+  </main>  <footer>
+    <p>&copy; 2025 SME Corporation PNG | Powered by GarIT Solutions</p>
+  </footer>  <!-- Upload Product Modal -->  <div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('uploadModal')">&times;</span>
+      <h3>Upload Your Product</h3>
+      <input type="text" placeholder="Product Name">
+      <input type="text" placeholder="Price (K)">
+      <input type="url" placeholder="Image URL">
+      <textarea placeholder="Description"></textarea>
+      <button class="button">Submit Product</button>
+    </div>
+  </div>  <!-- Other Modals -->  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h3>Business Registration Form</h3>
+      <input type="text" placeholder="Business Name">
+      <input type="text" placeholder="Owner's Full Name">
+      <input type="email" placeholder="Email Address">
+      <input type="text" placeholder="Business Type">
+      <button class="button">Submit</button>
+    </div>
+  </div>  <div id="trainingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('trainingModal')">&times;</span>
+      <h3>Available Training Categories</h3>
+      <select>
+        <option>Financial Literacy</option>
+        <option>Marketing for MSMEs</option>
+        <option>Business Planning</option>
+        <option>Record Keeping</option>
+      </select>
+      <button class="button">View Content</button>
+    </div>
+  </div>  <div id="coachingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('coachingModal')">&times;</span>
+      <h3>Request Coaching</h3>
+      <input type="text" placeholder="Your Name">
+      <input type="text" placeholder="Business Name">
+      <textarea placeholder="What help do you need?"></textarea>
+      <button class="button">Submit Request</button>
+    </div>
+  </div>  <div id="taxModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('taxModal')">&times;</span>
+      <h3>Tax Certificate Application</h3>
+      <input type="text" placeholder="Business Name">
+      <input type="text" placeholder="TIN (if available)">
+      <input type="text" placeholder="Contact Person">
+      <input type="email" placeholder="Email Address">
+      <button class="button">Submit Application</button>
+    </div>
+  </div>  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    }
+  </script></body>
+</html>
